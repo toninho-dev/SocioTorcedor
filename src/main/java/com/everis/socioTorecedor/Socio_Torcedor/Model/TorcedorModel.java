@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -14,7 +12,8 @@ import javax.persistence.Enumerated;
 @Entity(name = "torcedor")
 public class TorcedorModel {
 
-    @Column
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
     @Column
     String nome;

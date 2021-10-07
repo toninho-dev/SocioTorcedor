@@ -15,17 +15,17 @@ import javax.validation.constraints.NotBlank;
 public class CampanhaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    private Integer id;
     @Column
     @NotBlank
-    String nomeCampanha;
+    private String nomeCampanha;
     @Column
-    Long idTimeCampanha;
-    @Column
-    @DateTimeFormat
-    String dataVigenciainicio;
+    private Integer idTimeCampanha;
     @Column
     @DateTimeFormat
-    String dataVigenciaFim;
+    private String dataVigenciainicio;
+    @Column
+    @DateTimeFormat
+    private String dataVigenciaFim;
 
 }
