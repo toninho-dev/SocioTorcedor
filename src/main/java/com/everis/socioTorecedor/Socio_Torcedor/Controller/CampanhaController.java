@@ -1,8 +1,10 @@
 package com.everis.socioTorecedor.Socio_Torcedor.Controller;
 
+import com.everis.socioTorecedor.Socio_Torcedor.Controller.response.CampanhaResponse;
 import com.everis.socioTorecedor.Socio_Torcedor.Model.CampanhaModel;
 import com.everis.socioTorecedor.Socio_Torcedor.service.CampanhaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +17,9 @@ public class CampanhaController {
     private CampanhaService campanhaService;
 
     @GetMapping
-    public ResponseEntity<?> ConsultaCampanhaPorID(@RequestParam Integer id) {
-        return campanhaService.consultaPorID(id);
+    public ResponseEntity<CampanhaResponse> ConsultaCampanhaPorID(@RequestParam Integer id) {
+        campanhaService.consultaPorID(id);
+    return new ResponseEntity<CampanhaResponse>(HttpStatus.OK);
     }
 
     @GetMapping(path = "/lista")
@@ -28,13 +31,23 @@ public class CampanhaController {
         return campanhaService.salvar(campanhaModel);
     }
 
-//    @DeleteMapping
-//    public ResponseEntity<?> delete(@RequestParam("cpf") String cpf) {
-//        return clienteService.delete(cpf);
-//    }
-//
-//    @PutMapping
-//    public ResponseEntity<?> atualizar(@RequestParam("cpf") String cpf, @RequestBody @Valid ClienteModelDto cliente) {
-//        return clienteService.atualizar(cpf,cliente);
-//    }
+/*
+    @DeleteMapping
+    public ResponseEntity<?> delete(@RequestParam("cpf") String cpf) {
+        return clienteService.delete(cpf);
+    }
+
+    @PutMapping
+    public ResponseEntity<?> atualizar(@RequestParam("cpf") String cpf, @RequestBody @Valid ClienteModelDto cliente) {
+        return clienteService.atualizar(cpf,cliente);
+    }
+    @PostMapping
+    public ResponseEntity<?> atualizar(@RequestParam("cpf") String cpf, @RequestBody @Valid ClienteModelDto cliente) {
+        return clienteService.atualizar(cpf,cliente);
+    }
+    @GetMapping
+    public ResponseEntity<?> atualizar(@RequestParam("cpf") String cpf, @RequestBody @Valid ClienteModelDto cliente) {
+        return clienteService.atualizar(cpf,cliente);
+    }
+ */
 }
