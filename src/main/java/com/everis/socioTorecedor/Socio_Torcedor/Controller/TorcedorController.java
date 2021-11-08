@@ -1,8 +1,7 @@
 package com.everis.socioTorecedor.Socio_Torcedor.Controller;
 
-import com.everis.socioTorecedor.Socio_Torcedor.Model.CampanhaModel;
+import com.everis.socioTorecedor.Socio_Torcedor.Controller.response.TorcedorResponse;
 import com.everis.socioTorecedor.Socio_Torcedor.Model.TorcedorModel;
-import com.everis.socioTorecedor.Socio_Torcedor.service.CampanhaService;
 import com.everis.socioTorecedor.Socio_Torcedor.service.TorcedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +12,12 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/torcedor")
 public class TorcedorController {
-    
+
     @Autowired
     private TorcedorService torcedorService;
 
-    @GetMapping
-    public ResponseEntity<?> ConsultaTorcedorPorID(@RequestParam Integer id) {
+    @GetMapping({"id"})
+    public ResponseEntity<?> ConsultaTorcedorPorID(@PathVariable Integer id) {
         return torcedorService.consultaPorID(id);
     }
 
@@ -26,19 +25,24 @@ public class TorcedorController {
     public List<?> consultarTodos() {
         return torcedorService.consultarTodos();
     }
+
     @PostMapping
-    public ResponseEntity<?> salvar(@RequestBody @Valid TorcedorModel torcedorModel) {
+    public ResponseEntity<TorcedorResponse> salvar(@RequestBody @Valid TorcedorModel torcedorModel) {
         return torcedorService.salvar(torcedorModel);
     }
-/*
+
     @DeleteMapping
-    public ResponseEntity<?> delete(@RequestParam("cpf") String cpf) {
-        return clienteService.delete(cpf);
+    public ResponseEntity<?> deletar(@RequestParam Integer id) {
+        return torcedorService.delete(id);
     }
 
     @PutMapping
-    public ResponseEntity<?> atualizar(@RequestParam("cpf") String cpf, @RequestBody @Valid ClienteModelDto cliente) {
-        return clienteService.atualizar(cpf,cliente);
+    public ResponseEntity<?> put(@RequestParam @Valid TorcedorModel torcedorModel) {
+        // return torcedorService.put(torcedorModel);
+        return null;
+    }
+}
+/*
     }
     @PostMapping
     public ResponseEntity<?> atualizar(@RequestParam("cpf") String cpf, @RequestBody @Valid ClienteModelDto cliente) {
@@ -48,5 +52,6 @@ public class TorcedorController {
     public ResponseEntity<?> atualizar(@RequestParam("cpf") String cpf, @RequestBody @Valid ClienteModelDto cliente) {
         return clienteService.atualizar(cpf,cliente);
     }
- */
 }
+
+ */

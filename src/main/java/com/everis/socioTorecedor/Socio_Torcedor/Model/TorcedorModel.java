@@ -19,8 +19,9 @@ public class TorcedorModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    public Integer id;
 
+    @Column (unique = true)
     private String nome;
 
     @CPF

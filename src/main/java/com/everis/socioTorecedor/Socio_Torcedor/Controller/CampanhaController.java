@@ -37,12 +37,14 @@ public class CampanhaController {
         return clienteService.delete(cpf);
     }
 
+
     @PutMapping
     public ResponseEntity<?> atualizar(@RequestParam("cpf") String cpf, @RequestBody @Valid ClienteModelDto cliente) {
         return clienteService.atualizar(cpf,cliente);
     }
     @PostMapping
-    public ResponseEntity<?> atualizar(@RequestParam("cpf") String cpf, @RequestBody @Valid ClienteModelDto cliente) {
+    public ResponseEntity<?> atua
+    lizar(@RequestParam("cpf") String cpf, @RequestBody @Valid ClienteModelDto cliente) {
         return clienteService.atualizar(cpf,cliente);
     }
     @GetMapping

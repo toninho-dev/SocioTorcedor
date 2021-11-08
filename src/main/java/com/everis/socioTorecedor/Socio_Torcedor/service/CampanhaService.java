@@ -33,8 +33,8 @@ public class CampanhaService {
         return repository.findAll();
     }
     @Transactional
-    public ResponseEntity<?> salvar(CampanhaModel campanhaModel) {
-//        Optional<CampanhaModel> findId = repository.findById(campanhaModel.getId());
+    public ResponseEntity<CampanhaModel> salvar(CampanhaModel campanhaModel) {
+        CampanhaModel findId = repository.findById(campanhaModel.getId()).get();
         return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(campanhaModel));
     }
 

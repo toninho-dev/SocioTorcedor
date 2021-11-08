@@ -1,8 +1,7 @@
 package com.everis.socioTorecedor.Socio_Torcedor.service;
 
+import com.everis.socioTorecedor.Socio_Torcedor.Controller.response.TorcedorResponse;
 import com.everis.socioTorecedor.Socio_Torcedor.Model.TorcedorModel;
-import com.everis.socioTorecedor.Socio_Torcedor.Model.TorcedorModel;
-import com.everis.socioTorecedor.Socio_Torcedor.Repository.TorcedorRepository;
 import com.everis.socioTorecedor.Socio_Torcedor.Repository.TorcedorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +24,7 @@ public class TorcedorService {
     public ResponseEntity<?> consultaPorID(Integer id) {
         Optional<TorcedorModel> findId = repository.findById(id);
         return ResponseEntity.ok(findId.get());
+
     }
 
     public List<?> consultarTodos() {
@@ -35,35 +35,19 @@ public class TorcedorService {
         return repository.findAll();
     }
     @Transactional
-    public ResponseEntity<?> salvar(TorcedorModel torcedorModel) {
-//        Optional<TorcedorModel> findId = repository.findById(torcedorModel.getId());
-        return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(torcedorModel));
+    public ResponseEntity<TorcedorResponse> salvar(TorcedorModel torcedorModel) {
+        TorcedorModel teste = repository.save(torcedorModel);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(new TorcedorResponse(teste));
     }
-
-//    public ResponseEntity<?> delete(String cpf) {
-//        Optional<ClienteModel> cliente = repository.findByCpf(cpf);
-//        List<ContaModel> contas = repositoryConta.findAllByCpf(cpf);
-//        ExceptionJson exceptionJson = new ExceptionImpl();
-//        if (contas.isEmpty()) {
-//            if (exceptionJson.clienteExiste(repository, cpf)) {
-//                repository.delete(cliente.get());
-//                return exceptionJson.deleteClienteEfetuado(cliente.get().getId(), cliente.get().getNome(), cliente.get().getCpf());
-//            } else {
-//                return exceptionJson.clienteNEncontrada(cpf);
-//            }
-//        }
-//        return exceptionJson.contasPresente(repositoryConta, cpf);
-//    }
-//
-//
-//    public ResponseEntity<?> atualizar(String cpf, ClienteModelDto cliente) {
-//        Optional<ClienteModel> busca = repository.findByCpf(cpf);
-//        if (busca.isPresent()) {
-//            ClienteModel clienteModel = cliente.atualizar(cpf, repository);
-//            return ResponseEntity.ok(new ClienteModelDto(clienteModel));
-//        }
-//        ExceptionJson exceptionJson = new ExceptionImpl();
-//        return exceptionJson.clienteNEncontrada(cpf);
-//    }
-
-}
+    @Transactional
+    public ResponseEntity<?> delete(Integer id) {
+        Optional<TorcedorModel> findId = repository.findById(id);
+        if (!findId.isEmpty()) {
+            repository.deleteById(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+    }
+    }
